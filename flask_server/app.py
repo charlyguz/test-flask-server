@@ -18,7 +18,7 @@ app = Flask(__name__)
 # Reemplazar '*' con el dominio específico del frontend
 CORS(app, resources={r"/*": {"origins": ["*", "http://localhost:5173"]}})
 
-UPLOAD_FOLDER = 'uploads'
+UPLOAD_FOLDER = '/tmp/uploads' # In vercel we can't write to the filesystem, so we use /tmp
 ALLOWED_EXTENSIONS = {'wav', 'mp3', 'm4a', 'flac', 'aac', 'ogg'}
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
