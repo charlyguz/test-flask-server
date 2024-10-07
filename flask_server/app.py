@@ -7,6 +7,8 @@ from main_logic import start_interaction, transcribe_speech_to_text, transcribe_
 from flask_cors import CORS
 from werkzeug.utils import secure_filename
 #from pydub import AudioSegment
+import serverless_wsgi
+
 
 
 app = Flask(__name__)
