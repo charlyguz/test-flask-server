@@ -7,7 +7,7 @@ from flask import Flask, request, jsonify
 from main_logic import start_interaction, transcribe_speech_to_text, transcribe_speech_to_text_with_whisper
 from flask_cors import CORS
 #from pydub import AudioSegment
-import serverless_wsgi
+
 
 
 
@@ -135,9 +135,9 @@ def signal_handler(sig, frame):
 def handler(event, context):
     return serverless_wsgi.handle_request(app, event, context)
 
-"""
+
 if __name__ == '__main__':
 
     app.run(host='0.0.0.0', port=5001, debug=True)
 
-"""
+
