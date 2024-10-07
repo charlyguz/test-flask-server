@@ -3,9 +3,8 @@ gtts
 openai
 playsound==1.2.2
 python-dotenv
-flask-cors
 pydub
-Flask==2.2.5
-flask-cors==3.0.10
-serverless_wsgi==1.7.0
-
+Flask==1.1.4
+Flask-Cors==3.0.10
+Werkzeug==1.0.1
+serverless-wsgi==1.7.0
