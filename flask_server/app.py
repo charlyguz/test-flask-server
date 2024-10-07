@@ -45,6 +45,8 @@ interaction_lock = threading.Lock()
 
 
 
+
+
 # Función para manejar la señal de terminación y cerrar el hilo correctamente
 def signal_handler(sig, frame):
     print('Recibida señal de terminación. Cerrando servidor...')
