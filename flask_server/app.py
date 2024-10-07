@@ -1,11 +1,11 @@
 import threading
 import signal
 import os
+import re
 import sys
 from flask import Flask, request, jsonify
 from main_logic import start_interaction, transcribe_speech_to_text, transcribe_speech_to_text_with_whisper
 from flask_cors import CORS
-from werkzeug.utils import secure_filename
 #from pydub import AudioSegment
 import serverless_wsgi
 
@@ -36,6 +36,10 @@ def allowed_file(filename):
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
+# Eliminar cualquier carácter no alfanumérico o los puntos para extensiones
+def simple_secure_filename(filename):
+    filename = re.sub(r'[^a-zA-Z0-9_.-]', '', filename)
+    return filename
 
 '''
 # Variables globales para controlar el estado de la interacción
@@ -92,7 +96,7 @@ def transcribe():
         return jsonify({'status': 'error', 'message': 'No se seleccionó ningún archivo.'}), 400
     
     if file and allowed_file(file.filename):
-        filename = secure_filename(file.filename)
+        filename = simple_secure_filename(file.filename)
         file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         try:
             # Guardar el archivo en el servidor
