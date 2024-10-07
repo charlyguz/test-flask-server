@@ -1,5 +1,4 @@
 speechrecognition
-pyaudio
 gtts
 openai
 playsound==1.2.2
