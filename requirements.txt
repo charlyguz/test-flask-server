@@ -1,0 +1,8 @@
+speechrecognition
+pyaudio
+gtts
+openai
+playsound==1.2.2
+python-dotenv
+flask-cors
+pydub
