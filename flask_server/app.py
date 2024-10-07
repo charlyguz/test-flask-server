@@ -131,9 +131,7 @@ def signal_handler(sig, frame):
 
 
 
-# Adapta la aplicación para que sea manejada por Vercel
-def handler(event, context):
-    return serverless_wsgi.handle_request(app, event, context)
+
 
 
 if __name__ == '__main__':
