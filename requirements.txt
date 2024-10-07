@@ -6,3 +6,7 @@ playsound==1.2.2
 python-dotenv
 flask-cors
 pydub
+Flask==2.2.5
+flask-cors==3.0.10
+serverless_wsgi==1.7.0
+
