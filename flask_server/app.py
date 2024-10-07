@@ -56,6 +56,9 @@ signal.signal(signal.SIGTERM, signal_handler)
 
 '''
 
+@app.route('/')
+def hello():
+    return "¡Hola desde Flask desplegado en Vercel!"
 
 # Ruta opcional para iniciar la interacción manualmente
 @app.route('/start_interaction', methods=['POST'])
