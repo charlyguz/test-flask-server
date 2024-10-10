@@ -5,7 +5,7 @@ from playsound import playsound
 from dotenv import load_dotenv
 from flask import jsonify
 import time
-#import openai
+import openai
 from openai import OpenAI
 
 
@@ -13,7 +13,7 @@ from openai import OpenAI
 #load_dotenv(override=True)
 
 
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY_NEW"))
 
 
 
