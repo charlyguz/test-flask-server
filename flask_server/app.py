@@ -55,7 +55,7 @@ interaction_lock = threading.Lock()
 def signal_handler(sig, frame):
     print('Recibida señal de terminación. Cerrando servidor...')
     sys.exit(0)
-
+    test
 # Registrar el manejador de señales
 signal.signal(signal.SIGINT, signal_handler)
 signal.signal(signal.SIGTERM, signal_handler)
