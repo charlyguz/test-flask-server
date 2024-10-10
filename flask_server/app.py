@@ -4,11 +4,9 @@ import os
 import re
 import sys
 from flask import Flask, request, jsonify
-from main_logic import start_interaction, transcribe_speech_to_text, transcribe_speech_to_text_with_whisper
+from main_logic import start_interaction, transcribe_speech_to_text, transcribe_speech_to_text_with_whisper, test_function
 from flask_cors import CORS
 #from pydub import AudioSegment
-
-
 
 
 app = Flask(__name__)
@@ -66,24 +64,42 @@ signal.signal(signal.SIGTERM, signal_handler)
 
 @app.route('/')
 def hello():
-    return "¡Hola desde Flask desplegado en Vercel!"
+    return "¡Hola, desplegado localmente, si puedes leer esto todo ha salido correctamente!"
 
 # Ruta opcional para iniciar la interacción manualmente
 @app.route('/start_interaction', methods=['POST'])
 def start():
     try:
+        if 'audio_file' not in request.files:
+            return jsonify({'status': 'Error', 'message': 'No se ha enviado el archivo de audio en la solicitud.'}), 400
         
-        start_interaction()
-        return jsonify({'status': 'Interaction started'}), 200
+        file = request.files['audio_file']
+
+        if file and allowed_file(file.filename):
+            filename = simple_secure_filename(file.filename)
+            file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            file.save(file_path)
+
+            response = start_interaction(file_path)
+        
+        return jsonify({'status': 'Interaction started', 'ok':True, 'text': response}), 200
     
     except Exception as e:
-        return jsonify({'status': 'Error', 'message': str(e)}), 500
+        # imprime en consola el error
+        print(f'Error al iniciar la interacción: {e}')
+
+        return jsonify({'status': 'Error en el audio', 'message': str(e)}), 500
 
 
 @app.route('/test', methods=['GET'])
 def test():
+    
     return jsonify({'status': 'Test successful'}), 200
 
+@app.route('/test_connection', methods=['GET'])
+def test_connection():
+    text = test_function()
+    return jsonify({'status': f'Connection successful \n Se puede establecer conexion con el servidor. \n El servidor esta conectado y funcionando \n {text}' }), 200
 
 @app.route('/transcribe', methods=['POST'])
 def transcribe():
@@ -135,7 +151,7 @@ def signal_handler(sig, frame):
 
 
 if __name__ == '__main__':
-
+    print('Iniciando servidor Flask...')
     app.run(host='0.0.0.0', port=5001, debug=True)
 
 
