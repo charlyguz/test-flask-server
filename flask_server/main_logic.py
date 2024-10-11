@@ -5,7 +5,7 @@ from playsound import playsound
 from dotenv import load_dotenv
 from flask import jsonify
 import time
-import openai
+#import openai
 from openai import OpenAI
 
 

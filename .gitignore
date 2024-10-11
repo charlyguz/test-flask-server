@@ -1,4 +1,7 @@
 testenv/
 .env
 **/.env
+__pycache__/
+main_logic.cpython-311.pyc
+
 
